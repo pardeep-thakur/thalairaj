@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#140c08" />
+  
+  <title>Thalairaj Biryani | Home of the Original 21 Spice Biryani</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Home of the Original 21 Spice Biryani and Neruppu Chicken 21. Famous for premium chicken and veg biryanis inspired by the Nizam kitchens of Hyderabad, Nellore, and traditional Tamil Nadu cooking." />
+  <meta name="keywords" content="biryani, 21 spice biryani, thalairaj biryani, neruppu chicken, Nellore, Hyderabad dum biryani, order food online, premium Indian restaurant" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/thalairaj_logo.png" type="image/png" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" id="navLogo">
+        <img src="assets/thalairaj_logo.png" alt="Thalairaj Logo" class="logo-img" />
+        <span class="logo-text">THALAIRAJ</span>
+      </a>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#spices" class="nav-link">21 Spices</a>
+        <a href="#menu" class="nav-link">Our Menu</a>
+        <a href="#about" class="nav-link">Our Story</a>
+        <a href="#faqs" class="nav-link">FAQs</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#menu" class="btn btn-primary btn-sm nav-order-btn">Order Now</a>
+        <!-- Mobile Nav Toggle -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+          <i class="ph-bold ph-list" id="toggleIcon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-bg">
+      <div class="gradient-overlay"></div>
+    </div>
+    
+    <div class="hero-container">
+      <div class="hero-content fade-in">
+        <span class="hero-kicker"><i class="ph-fill ph-sparkle"></i> A 100-Year Legacy of Flavor</span>
+        <h1 class="hero-title">The Original <span class="text-highlight">21 Spice</span> Biryani</h1>
+        <p class="hero-description">
+          Taste the heritage of the Nizam royal kitchens of Hyderabad, perfected with Nellore spices and authentic Tamil cooking traditions. A culinary masterpiece in every grain.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-primary btn-lg">
+            <span>Explore Menu</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </a>
+          <a href="https://linktr.ee/thalairajbiryani" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">
+            <span>Order Direct</span>
+            <i class="ph-bold ph-arrow-square-out"></i>
+          </a>
+        </div>
+        
+        <!-- Quick stats / key points -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">21</span>
+            <span class="stat-label">Hand-Ground Spices</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">17</span>
+            <span class="stat-label">Years in Nizam Kitchens</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Authentic Ingredients</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-image-container fade-in">
+        <div class="hero-image-wrapper">
+          <div id="hero-3d-container" class="hero-3d-container">
+            <img src="assets/hero_biryani_handi.png" alt="Thalairaj 3D Biryani Handi" id="hero-pot-img" class="hero-pot-img" />
+            <canvas id="hero-3d-canvas"></canvas>
+          </div>
+          <div class="floating-badge badge-1">
+            <i class="ph-fill ph-flame"></i>
+            <div>
+              <strong>Neruppu Hot</strong>
+              <span>Signature Starters</span>
+            </div>
+          </div>
+          <div class="floating-badge badge-2">
+            <i class="ph-fill ph-seal-check"></i>
+            <div>
+              <strong>Pure Basmati</strong>
+              <span>Long Grain Saffron Rice</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Spice Explorer Section -->
+  <section class="spices-section" id="spices">
+    <div class="section-container">
+      <div class="section-header text-center fade-in">
+        <span class="section-kicker">Secret Recipe</span>
+        <h2 class="section-title">The Royal 21 Spice Blend</h2>
+        <p class="section-description">
+          Our signature flavor comes from a delicate balance of 21 premium spices handpicked, roasted, and blended. Hover or click on the key spices to discover their culinary magic.
+        </p>
+      </div>
+
+      <div class="spice-explorer-grid fade-in">
+        <!-- Spice Item 1: Saffron -->
+        <div class="spice-card" data-spice="saffron">
+          <div class="spice-icon-wrapper">
+            <span class="spice-letter">Sf</span>
+          </div>
+          <h3 class="spice-name">Kashmiri Saffron</h3>
+          <p class="spice-desc-short">Gives our rice its signature golden hue and deep aroma.</p>
+          <div class="spice-details">
+            <strong>Profile:</strong> Sweet, floral, metallic undertones.<br>
+            <strong>Role:</strong> Hand-sprinkled over Basmati layers during the Dum cook to infuse pure luxury.
+          </div>
+        </div>
+        
+        <!-- Spice Item 2: Cardamom -->
+        <div class="spice-card" data-spice="cardamom">
+          <div class="spice-icon-wrapper">
+            <span class="spice-letter">Cd</span>
+          </div>
+          <h3 class="spice-name">Green Cardamom</h3>
+          <p class="spice-desc-short">The sweet-spicy foundation of aromatic Indian cuisine.</p>
+          <div class="spice-details">
+            <strong>Profile:</strong> Citrusy, minty, highly herbal.<br>
+            <strong>Role:</strong> Crushed fresh into the ghee base to set the warming tone of the curry layers.
+          </div>
+        </div>
+
+        <!-- Spice Item 3: Star Anise -->
+        <div class="spice-card" data-spice="staranise">
+          <div class="spice-icon-wrapper">
+            <span class="spice-letter">Sa</span>
+          </div>
+          <h3 class="spice-name">Star Anise</h3>
+          <p class="spice-desc-short">Unlocks deep exotic sweetness and complex base flavors.</p>
+          <div class="spice-details">
+            <strong>Profile:</strong> Licorice-like, warm, and highly aromatic.<br>
+            <strong>Role:</strong> Added whole to the rice-boiling water to permeate every single grain.
+          </div>
+        </div>
+
+        <!-- Spice Item 4: Pepper -->
+        <div class="spice-card" data-spice="blackpepper">
+          <div class="spice-icon-wrapper">
+            <span class="spice-letter">Bp</span>
+          </div>
+          <h3 class="spice-name">Nellore Black Pepper</h3>
+          <p class="spice-desc-short">Bold, sharp, heat-releasing spice from our Southern roots.</p>
+          <div class="spice-details">
+            <strong>Profile:</strong> Pungent, woody heat with citrus hints.<br>
+            <strong>Role:</strong> Essential driver behind our 'Neruppu' (fire) and pepper chicken starters.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu Section -->
+  <section class="menu-section" id="menu">
+    <div class="section-container">
+      <div class="section-header text-center fade-in">
+        <span class="section-kicker">Signature Dishes</span>
+        <h2 class="section-title">Explore Our Royal Menu</h2>
+        <p class="section-description">
+          From slow-cooked royal dum biryanis to fire-glazed starters, find your perfect meal. Add items to your tray to simulate checkout or order directly.
+        </p>
+      </div>
+
+      <!-- Menu Controls (Filters, Search, Veg-only) -->
+      <div class="menu-controls fade-in">
+        <div class="search-box">
+          <i class="ph-bold ph-magnifying-glass"></i>
+          <input type="text" id="menuSearch" placeholder="Search dishes (e.g. Chicken, Paneer, Roti)..." aria-label="Search menu" />
+        </div>
+        
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-category="all">All Items</button>
+          <button class="filter-tab" data-category="bowls">Biryani Bowls</button>
+          <button class="filter-tab" data-category="biryanis">Biryanis & Rice</button>
+          <button class="filter-tab" data-category="family">Family Packs</button>
+          <button class="filter-tab" data-category="starters">Starters</button>
+          <button class="filter-tab" data-category="extras">Extras</button>
+        </div>
+
+        <div class="toggle-control">
+          <label class="switch-label" for="vegToggle">
+            <span class="toggle-text">Veg Only</span>
+            <div class="switch">
+              <input type="checkbox" id="vegToggle" />
+              <span class="slider"></span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Food Grid -->
+      <div class="food-grid id-grid fade-in" id="foodGrid">
+        <!-- JS inserts food items here -->
+      </div>
+      
+      <!-- Empty Search State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="ph-bold ph-cooking-pot"></i>
+        <h3>No dishes matched your criteria</h3>
+        <p>Try searching for something else or adjusting your filters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story / Heritage Section -->
+  <section class="about-section" id="about">
+    <div class="about-container">
+      <div class="about-image-wrapper fade-in">
+        <img src="assets/about_story.png" alt="Chinnasami Selvam in the Nizam Royal Kitchen" class="about-img" />
+        <div class="image-overlay"></div>
+      </div>
+      
+      <div class="about-content fade-in">
+        <span class="section-kicker">Our Heritage</span>
+        <h2 class="about-title">The Legend of Thalaivar-Raja</h2>
+        <div class="about-text-body">
+          <p>
+            Nearly a century ago, Chinnasami Selvam was widely known in Nellore as <strong>"Thalaivar-Raja"</strong> (Thalairaj) for his outstanding culinary skills. Driven by ambition, the young cook migrated to Hyderabad, earning a coveted place in the kitchen of the Nizam of Hyderabad.
+          </p>
+          <p>
+            For 17 glorious years, he worked alongside master chefs, creating custom formulations that delighted the royal court. When he eventually returned to Nellore to settle down, he carried with him the secret blending recipes he had crafted for the Nizam.
+          </p>
+          <p>
+            By blending the delicate royal spices of Hyderabad with the fiery heat of Nellore and the traditional dum baking of his Tamil heritage, he perfected the legendary <strong>21 Spice Masala</strong>. That recipe is passed down intact, bringing royalty to your table today.
+          </p>
+        </div>
+        <div class="heritage-badges">
+          <div class="h-badge">
+            <i class="ph-fill ph-crown"></i>
+            <span>Nizam Kitchen Heritage</span>
+          </div>
+          <div class="h-badge">
+            <i class="ph-fill ph-hourglass"></i>
+            <span>100 Year Old Masala</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faqs">
+    <div class="section-container">
+      <div class="section-header text-center fade-in">
+        <span class="section-kicker">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-description">
+          Everything you need to know about our ingredients, spice blends, delivery channels, and catering options.
+        </p>
+      </div>
+
+      <div class="faq-grid fade-in">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What makes the 21 Spice Biryani different from other biryanis?</span>
+            <i class="ph-bold ph-caret-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Most standard biryanis rely on mass-produced garam masala with 5 to 8 ingredients. Our Biryani is flavored with 21 distinct spices, including Kashmiri Saffron, stone flower (kalpasi), star anise, and Nellore black pepper. They are roasted in small batches to preserve essential oils and prevent bitterness.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What is 'Neruppu' Chicken?</span>
+            <i class="ph-bold ph-caret-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              'Neruppu' means Fire in Tamil. Our Neruppu Chicken 21 is a boneless starter tossed in a high-heat glaze made of ground red chilies, pepper, curry leaves, and a touch of tamarind. It represents the spicy, bold Southern-style preparation from our roots.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does the simulated tray work?</span>
+            <i class="ph-bold ph-caret-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              You can browse our menu and add items to your tray right here! Once you are ready, click "Place Order". Since we partner with leading aggregators and direct networks, the app compiles your cart details and directs you to our official portal (Linktree) to choose your preferred ordering platform.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you take bulk or party orders?</span>
+            <i class="ph-bold ph-caret-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Yes! We offer bulk catering options for parties, corporate events, and family gatherings. Please contact us via phone or email, and we can curate a custom menu suited to your guest size.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer Section -->
+  <footer class="footer-section" id="contact">
+    <div class="footer-top">
+      <div class="footer-container">
+        
+        <div class="footer-info">
+          <a href="#" class="footer-logo">
+            <img src="assets/thalairaj_logo.png" alt="Thalairaj Logo" />
+            <span>THALAIRAJ</span>
+          </a>
+          <p class="footer-bio">
+            Rooted in heritage, packed with flavor. Elevating the art of Dum Biryani for a new generation of food lovers.
+          </p>
+          <div class="social-links">
+            <a href="https://instagram.com/thalairaj_biryani?igshid=YmMyMTA2M2Y=" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph-bold ph-instagram-logo"></i></a>
+            <a href="https://www.facebook.com/thalairaj21" target="_blank" rel="noopener" aria-label="Facebook"><i class="ph-bold ph-facebook-logo"></i></a>
+            <a href="#" aria-label="Twitter"><i class="ph-bold ph-twitter-logo"></i></a>
+            <a href="#" aria-label="Youtube"><i class="ph-bold ph-youtube-logo"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#spices">21 Spices</a></li>
+            <li><a href="#menu">Our Menu</a></li>
+            <li><a href="#about">About Legacy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <h4>Policy</h4>
+          <ul>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Locations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <ul class="contact-details">
+            <li>
+              <i class="ph-bold ph-phone"></i>
+              <a href="tel:8047192229">80 4719 2229</a>
+            </li>
+            <li>
+              <i class="ph-bold ph-envelope"></i>
+              <a href="mailto:thalairajbiryani@gmail.com">thalairajbiryani@gmail.com</a>
+            </li>
+            <li>
+              <i class="ph-bold ph-map-pin"></i>
+              <span>Bengaluru, Karnataka, India</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <p>&copy; 2026 Thalairaj Biryani. All Rights Reserved. Crafted with passion.</p>
+        <p>Made Modern & Professional by Antigravity</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
