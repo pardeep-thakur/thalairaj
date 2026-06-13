@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 export default function Hero() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section
       id="home"
-      className="relative min-h-[95vh] lg:min-h-screen flex items-center pt-32 pb-20 md:pt-36 md:pb-24 lg:pt-44 lg:pb-28 overflow-hidden bg-gold-light"
+      className="relative min-h-[95vh] lg:min-h-screen flex items-center pt-28 pb-20 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28 overflow-hidden bg-gold-light"
     >
       {/* Video Background Layer (z-index: 0) */}
       <video
@@ -18,18 +22,18 @@ export default function Hero() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Soft Light Gold Gradient Overlay Layer (z-index: 10) - rgba(250, 243, 224, 0.25-0.35) */}
+      {/* Soft Light Gold Overlay Layer (z-index: 10) - rgba(250, 243, 224, 0.4) */}
       <div 
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
-          background: "linear-gradient(to bottom, rgba(250, 243, 224, 0.35) 0%, rgba(250, 243, 224, 0.28) 50%, rgba(250, 243, 224, 0.25) 100%)"
+          background: "rgba(250, 243, 224, 0.4)"
         }}
       />
 
       {/* Content Layer (z-index: 20) */}
       <div className="relative w-full max-w-7xl mx-auto px-4 md:px-6 z-20">
         {/* Semi-transparent text container for visual separation and readability */}
-        <div className="bg-white/75 backdrop-blur-lg rounded-luxury border border-white/20 p-5 sm:p-10 md:p-12 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-6 md:space-y-8 max-w-4xl mx-auto lg:mx-0">
+        <div className="bg-white/60 backdrop-blur-md rounded-luxury border border-white/40 p-5 sm:p-10 md:p-12 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 lg:space-y-7 max-w-4xl mx-auto lg:mx-0">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gold-border bg-white/70 shadow-sm">
@@ -42,19 +46,44 @@ export default function Hero() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="font-serif font-black text-4xl sm:text-5xl lg:text-7xl text-[#3B0764] leading-[1.15] tracking-tight">
+          <h1 className="font-serif font-black text-3xl sm:text-5xl lg:text-7xl text-[#3B0764] leading-[1.15] tracking-tight">
             Thalairaj 21 Spice Biryani
           </h1>
 
-          {/* Paragraph Text */}
-          <p className="text-[#374151] font-medium text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl">
-            Experience the culinary masterpiece crafted with a royal blend of 21 handpicked signature spices, layered
-            with premium long-grain Basmati rice and slow-cooked to dumpukht perfection. Inspired by the Nizam royal
-            kitchens of Hyderabad and southern Nellore spices.
+          {/* Paragraph Text - Responsive length with compact hook on mobile */}
+          <p className="text-[#374151] font-medium text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+            {/* Mobile view */}
+            <span className="lg:hidden">
+              {isExpanded 
+                ? "Experience the culinary masterpiece crafted with a royal blend of 21 handpicked signature spices, layered with premium long-grain Basmati rice and slow-cooked to dumpukht perfection. Inspired by the Nizam royal kitchens of Hyderabad and southern Nellore spices."
+                : "Experience the culinary masterpiece crafted with a royal blend of 21 handpicked signature spices, slow-cooked to dumpukht perfection."
+              }
+            </span>
+            {/* Desktop view */}
+            <span className="hidden lg:inline">
+              Experience the culinary masterpiece crafted with a royal blend of 21 handpicked signature spices, layered with premium long-grain Basmati rice and slow-cooked to dumpukht perfection. Inspired by the Nizam royal kitchens of Hyderabad and southern Nellore spices.
+            </span>
           </p>
 
+          {/* Expand Toggle Button for Mobile */}
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="lg:hidden text-purple-brand hover:text-orange-cta font-bold text-xs uppercase tracking-widest flex items-center gap-1.5 focus-visible:outline-none min-h-[44px]"
+            aria-expanded={isExpanded}
+          >
+            <span>{isExpanded ? "Show Less" : "Read Our Royal Story"}</span>
+            <svg 
+              className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
           {/* Buttons: Primary & Secondary hierarchy */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start w-full sm:w-auto pt-2">
             <a
               href="https://linktr.ee/thalairajbiryani"
               target="_blank"
@@ -71,8 +100,10 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Micro Highlights */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-y-4 gap-x-8 pt-8 border-t border-gold-border/60 w-full">
+          {/* Micro Highlights - Hidden on mobile unless expanded */}
+          <div className={`flex-wrap justify-center lg:justify-start gap-y-4 gap-x-8 pt-6 border-t border-gold-border/60 w-full ${
+            isExpanded ? "flex" : "hidden lg:flex"
+          }`}>
             <div className="flex items-center gap-2">
               <svg className="w-5 h-5 text-orange-cta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -97,4 +128,3 @@ export default function Hero() {
     </section>
   );
 }
-
