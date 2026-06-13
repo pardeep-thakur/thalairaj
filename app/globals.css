@@ -110,3 +110,14 @@ p, li, td {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(231, 216, 180, 0.4);
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+

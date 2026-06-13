@@ -381,65 +381,75 @@ export default function MenuGrid() {
         </div>
 
           {/* Explorer Filter Controls */}
-          <div className="glass-panel p-6 rounded-[24px] mb-10 flex flex-col lg:flex-row gap-6 items-center justify-between shadow-sm">
-            {/* Search Box */}
-            <div className="relative w-full lg:max-w-md">
-              <svg
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary/60"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          <div className="glass-panel p-6 rounded-[24px] mb-12 flex flex-col gap-6 shadow-sm">
+            {/* Top Row: Search and Veg Toggle */}
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
+              {/* Search Box */}
+              <div className="relative w-full md:max-w-md">
+                <svg
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-brand/60"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search our royal menu..."
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3 bg-white rounded-xl border-2 border-gold-border focus:border-purple-brand focus:ring-2 focus:ring-purple-brand/20 outline-none transition-all text-sm font-medium text-text-primary shadow-sm placeholder-text-secondary/50 focus:bg-white"
                 />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search our royal menu..."
-                value={searchKeyword}
-                onChange={(e) => setSearchKeyword(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-white rounded-xl border border-gold-border/60 focus:border-purple-brand focus:ring-1 focus:ring-purple-brand outline-none transition-all text-sm"
-              />
-            </div>
+              </div>
 
-            {/* Category Slider Tabs */}
-            <div className="w-full overflow-x-auto no-scrollbar py-1 flex items-center gap-2 max-w-full lg:justify-center">
-              {categories.map((tab) => (
+              {/* Veg Switch - Aligned on the right on larger screens, next to/below search on mobile */}
+              <div className="flex items-center justify-between md:justify-start gap-4 bg-white/80 px-5 py-2.5 rounded-full border border-gold-border/80 shadow-sm shrink-0 w-full md:w-auto">
+                <div className="flex items-center gap-2">
+                  <span className="w-3.5 h-3.5 rounded-sm flex items-center justify-center border border-green-600 p-[1.5px] shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-600" />
+                  </span>
+                  <span className="text-sm font-bold text-text-secondary">Veg Only</span>
+                </div>
                 <button
-                  key={tab.id}
-                  onClick={() => setActiveCategory(tab.id)}
-                  className={`px-4 py-2 rounded-lg text-xs md:text-sm font-bold whitespace-nowrap transition-all focus-visible:outline-none min-h-[40px] flex items-center justify-center ${
-                    activeCategory === tab.id
-                      ? "bg-purple-brand text-white shadow-md"
-                      : "bg-white text-text-secondary border border-gold-border hover:bg-gold-light/40"
+                  role="switch"
+                  aria-checked={isVegOnly}
+                  onClick={() => setIsVegOnly(!isVegOnly)}
+                  className={`w-11 h-6 rounded-full p-0.5 transition-all duration-300 focus-visible:outline-none relative ${
+                    isVegOnly ? "bg-green-600" : "bg-gray-200"
                   }`}
                 >
-                  {tab.label}
+                  <div
+                    className={`w-5 h-5 rounded-full bg-white shadow-md transform transition-all duration-300 ${
+                      isVegOnly ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  />
                 </button>
-              ))}
+              </div>
             </div>
 
-            {/* Veg Switch */}
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="text-sm font-bold text-text-secondary">Veg Only</span>
-              <button
-                role="switch"
-                aria-checked={isVegOnly}
-                onClick={() => setIsVegOnly(!isVegOnly)}
-                className={`w-12 h-6 rounded-full p-1 transition-all duration-300 focus-visible:outline-none ${
-                  isVegOnly ? "bg-green-600" : "bg-gray-300"
-                }`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full bg-white shadow-md transform transition-all duration-300 ${
-                    isVegOnly ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </button>
+            {/* Bottom Row: Category Slider Tabs (Horizontally scrollable) */}
+            <div className="relative w-full border-t border-gold-border/20 pt-4">
+              <div className="w-full overflow-x-auto no-scrollbar flex items-center gap-3 py-1 scroll-smooth snap-x">
+                {categories.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveCategory(tab.id)}
+                    className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all focus-visible:outline-none min-h-[40px] flex items-center justify-center border ${
+                      activeCategory === tab.id
+                        ? "bg-purple-brand text-white border-purple-brand shadow-md shadow-purple-brand/10"
+                        : "bg-white text-text-secondary border-gold-border hover:bg-gold-light/20"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
