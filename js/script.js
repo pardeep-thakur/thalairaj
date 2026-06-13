@@ -599,37 +599,27 @@ function setupRevealAnimations() {
 // ==========================================================================
 function setupHeroParallax() {
   const container = document.getElementById("hero-3d-container");
-  const pot = document.getElementById("hero-pot-img");
-  const badge1 = document.querySelector(".badge-1");
-  const badge2 = document.querySelector(".badge-2");
+  const videoCard = document.getElementById("hero-video-card");
   
-  if (!container || !pot) return;
+  if (!container || !videoCard) return;
   
   window.addEventListener("mousemove", (e) => {
     // Normalize coordinates (-0.5 to 0.5)
     const normX = (e.clientX / window.innerWidth) - 0.5;
     const normY = (e.clientY / window.innerHeight) - 0.5;
     
-    // Tilt the pot image
-    const potRotX = -normY * 24; // rot X up/down
-    const potRotY = normX * 24;  // rot Y left/right
-    pot.style.transform = `rotateX(${potRotX}deg) rotateY(${potRotY}deg) translateZ(20px)`;
-    
-    // Parallax badges slightly lagged
-    if (badge1) {
-      badge1.style.transform = `translate(${normX * -35}px, ${normY * -35}px) translateZ(40px)`;
-    }
-    if (badge2) {
-      badge2.style.transform = `translate(${normX * 35}px, ${normY * 35}px) translateZ(40px)`;
-    }
+    // Tilt the video card
+    const cardRotX = -normY * 16; // rot X up/down
+    const cardRotY = normX * 16;  // rot Y left/right
+    videoCard.style.transform = `rotateX(${cardRotX}deg) rotateY(${cardRotY}deg) translateZ(10px)`;
   });
 
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
     if (scrollY < 800) {
       // Sink the centerpiece slightly and fade out
-      pot.style.transform = `translateY(${scrollY * 0.18}px) scale(${1 - scrollY * 0.0006})`;
-      pot.style.opacity = `${1 - scrollY * 0.0015}`;
+      videoCard.style.transform = `translateY(${scrollY * 0.15}px) scale(${1 - scrollY * 0.0004})`;
+      videoCard.style.opacity = `${1 - scrollY * 0.0012}`;
     }
   });
 }

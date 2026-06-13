@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#140c08" />
+  <meta name="theme-color" content="#E8D8B8" />
 
   <title>Thalairaj Biryani | Home of the Original 21 Spice Biryani</title>
 
@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -35,21 +35,24 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="brand-logo" id="navLogo">
-        <img src="assets/thalairaj_logo.png" alt="Thalairaj Logo" class="logo-img" />
-        <span class="logo-text">THALAIRAJ</span>
+        <div class="logo-wrapper">
+          <i class="ph-fill ph-crown brand-crown"></i>
+          <span class="logo-text">THALAIRAJ</span>
+          <span class="logo-subtext">21 Spice Biryani</span>
+        </div>
       </a>
 
       <div class="nav-links" id="navLinks">
         <a href="#home" class="nav-link active">Home</a>
-        <a href="#spices" class="nav-link">21 Spices</a>
         <a href="#menu" class="nav-link">Our Menu</a>
         <a href="#about" class="nav-link">Our Story</a>
+        <a href="#spices" class="nav-link">21 Spices</a>
         <a href="#faqs" class="nav-link">FAQs</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
 
       <div class="nav-actions">
-        <a href="#menu" class="btn btn-primary btn-sm nav-order-btn">Order Now</a>
+        <a href="https://linktr.ee/thalairajbiryani" target="_blank" rel="noopener" class="btn btn-primary btn-sm nav-order-btn">Order Now <i class="ph-bold ph-shopping-bag"></i></a>
         <!-- Mobile Nav Toggle -->
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
           <i class="ph-bold ph-list" id="toggleIcon"></i>
@@ -60,68 +63,81 @@
 
   <!-- Hero Section -->
   <section class="hero-section" id="home">
-    <div class="hero-bg">
-      <div class="gradient-overlay"></div>
-    </div>
-
-    <div class="hero-container">
-      <div class="hero-content fade-in">
-        <span class="hero-kicker"><i class="ph-fill ph-sparkle"></i> A 100-Year Legacy of Flavor</span>
-        <h1 class="hero-title">The Original <span class="text-highlight">21 Spice</span> Biryani</h1>
-        <p class="hero-description">
-          Taste the heritage of the Nizam royal kitchens of Hyderabad, perfected with Nellore spices and authentic Tamil
-          cooking traditions. A culinary masterpiece in every grain.
-        </p>
-        <div class="hero-actions">
-          <a href="#menu" class="btn btn-primary btn-lg">
-            <span>Explore Menu</span>
-            <i class="ph-bold ph-arrow-right"></i>
-          </a>
-          <a href="https://linktr.ee/thalairajbiryani" target="_blank" rel="noopener" class="btn btn-secondary btn-lg">
-            <span>Order Direct</span>
-            <i class="ph-bold ph-arrow-square-out"></i>
-          </a>
+    <div class="hero-royal-container">
+      <div class="hero-grid-split">
+        <!-- Left Side: Content -->
+        <div class="hero-content-col">
+          <div class="hero-royal-label">
+            <i class="ph-fill ph-crown"></i>
+            <span>Royal Taste. Authentic Tradition.</span>
+          </div>
+          <h1 class="hero-luxury-title">Thalairaj 21 Spice Biryani</h1>
+          <p class="hero-luxury-description">
+            Experience the culinary masterpiece crafted with a royal blend of 21 handpicked signature spices, layered with premium long-grain Basmati rice and slow-cooked to dumpukht perfection. Inspired by the Nizam royal kitchens of Hyderabad and southern Nellore spices.
+          </p>
+          <div class="hero-luxury-actions">
+            <a href="https://linktr.ee/thalairajbiryani" target="_blank" rel="noopener" class="btn btn-luxury-primary btn-lg">Order Now <i class="ph-bold ph-arrow-right"></i></a>
+            <a href="#menu" class="btn btn-luxury-secondary btn-lg">Explore Menu</a>
+          </div>
+          <!-- Mini features horizontal list below buttons -->
+          <div class="hero-mini-features">
+            <div class="mini-feature-item">
+              <i class="ph-bold ph-sparkles"></i>
+              <span>21 Signature Spices</span>
+            </div>
+            <div class="mini-feature-item">
+              <i class="ph-bold ph-cooking-pot"></i>
+              <span>Slow Cooked Perfection</span>
+            </div>
+            <div class="mini-feature-item">
+              <i class="ph-bold ph-leaf"></i>
+              <span>Fresh & Premium Ingredients</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Quick stats / key points -->
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-num">21</span>
-            <span class="stat-label">Hand-Ground Spices</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num">17</span>
-            <span class="stat-label">Years in Nizam Kitchens</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Authentic Ingredients</span>
+        <!-- Right Side: Realistic Food Image -->
+        <div class="hero-image-col">
+          <div class="hero-food-image-wrapper">
+            <img src="assets/hero_biryani_handi.png" alt="Thalairaj Premium 21 Spice Biryani in Copper Handi" class="hero-food-img" />
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="hero-image-container fade-in">
-        <div class="hero-image-wrapper">
-          <div id="hero-3d-container" class="hero-3d-container">
-            <img src="assets/hero_biryani_handi.png" alt="Thalairaj 3D Biryani Handi" id="hero-pot-img"
-              class="hero-pot-img" />
-            <canvas id="hero-3d-canvas"></canvas>
+  <!-- Feature Highlights Section -->
+  <section class="highlights-section">
+    <div class="highlights-container">
+      <div class="highlights-grid">
+        <!-- Card 1 -->
+        <div class="highlight-card">
+          <div class="highlight-icon">
+            <i class="ph-bold ph-sparkles"></i>
           </div>
-          <div class="floating-badge badge-1">
-            <i class="ph-fill ph-flame"></i>
-            <div>
-              <strong>Neruppu Hot</strong>
-              <span>Signature Starters</span>
-            </div>
+          <div class="highlight-info">
+            <h4>21 Signature Spices</h4>
+            <p>A royal blend of 21 handpicked spices roasted and ground to perfection.</p>
           </div>
-          <div class="floating-badge badge-2">
-            <i class="ph-fill ph-seal-check"></i>
-            <div>
-              <strong>Pure Basmati</strong>
-              <span>Long Grain Saffron Rice</span>
-            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="highlight-card">
+          <div class="highlight-icon">
+            <i class="ph-bold ph-cooking-pot"></i>
+          </div>
+          <div class="highlight-info">
+            <h4>Slow Cooked Perfection</h4>
+            <p>Traditional dum-pukht style cooking to lock in the rich flavors and aromas.</p>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="highlight-card">
+          <div class="highlight-icon">
+            <i class="ph-bold ph-leaf"></i>
+          </div>
+          <div class="highlight-info">
+            <h4>Fresh & Premium Ingredients</h4>
+            <p>Using only high-quality Basmati rice, farm-fresh herbs, and select ingredients.</p>
           </div>
         </div>
       </div>
