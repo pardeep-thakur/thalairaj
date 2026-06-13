@@ -28,24 +28,18 @@ export default function Header() {
       } backdrop-blur-md flex items-center`}
     >
       <div className="w-full max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
-        {/* Brand Logo (Left) */}
         <Link href="#home" className="flex items-center gap-2 group focus-visible:outline-none">
-          <div className="flex flex-col items-center">
-            {/* Crown Icon */}
-            <svg
-              className="w-5 h-5 text-orange-cta transition-transform duration-300 group-hover:scale-110"
-              fill="currentColor"
-              viewBox="0 0 256 256"
-            >
-              <path d="M240,96a16,16,0,0,0-21.49-15l-33.15,11-40-60a16,16,0,0,0-26.68,0l-40,60L25.49,81A16,16,0,0,0,4,96v88a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V96ZM216,184H40V105.74l39.46,13.16a16,16,0,0,0,18.06-7.56L128,65.37l30.48,45.97a16,16,0,0,0,18.06,7.56l39.46-13.16Z" />
-            </svg>
-            <span className="font-serif font-extrabold text-xl md:text-2xl tracking-widest text-purple-brand leading-none mt-1">
-              THALAIRAJ
-            </span>
-            <span className="text-[8px] font-bold tracking-[0.25em] text-orange-cta uppercase leading-none mt-1">
-              21 Spice Biryani
-            </span>
-          </div>
+          {/* Crown Icon */}
+          <svg
+            className="w-5.5 h-5.5 text-orange-cta transition-transform duration-300 group-hover:scale-110"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path d="M240,96a16,16,0,0,0-21.49-15l-33.15,11-40-60a16,16,0,0,0-26.68,0l-40,60L25.49,81A16,16,0,0,0,4,96v88a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V96ZM216,184H40V105.74l39.46,13.16a16,16,0,0,0,18.06-7.56L128,65.37l30.48,45.97a16,16,0,0,0,18.06,7.56l39.46-13.16Z" />
+          </svg>
+          <span className="font-serif font-extrabold text-xl md:text-2xl tracking-widest text-purple-brand leading-none">
+            THALAIRAJ
+          </span>
         </Link>
 
         {/* Navigation Links (Center) */}
