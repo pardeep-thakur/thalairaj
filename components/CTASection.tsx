@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CTASection() {
   return (
-    <section className="relative py-20 md:py-28 bg-purple-brand overflow-hidden text-center">
+    <section className="relative py-12 md:py-16 bg-purple-brand overflow-hidden text-center">
       {/* Decorative Ornaments/Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] bg-purple-secondary/20 rounded-full blur-3xl -z-10" />
       <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-orange-cta/10 rounded-full blur-2xl -z-10" />

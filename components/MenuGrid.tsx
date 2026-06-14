@@ -364,7 +364,7 @@ export default function MenuGrid() {
   ];
 
   return (
-    <section id="menu" className="relative py-20 bg-cream-warm">
+    <section id="menu" className="relative py-12 md:py-16 bg-cream-warm">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
         {/* ================= ROYAL FEAST MENU EXPLORER ================= */}

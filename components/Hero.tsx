@@ -22,18 +22,18 @@ export default function Hero() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Soft Light Gold Overlay Layer (z-index: 10) - rgba(250, 243, 224, 0.4) */}
+      {/* Soft Light Gold Overlay Layer (z-index: 10) - rgba(250, 243, 224, 0.15) */}
       <div 
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
-          background: "rgba(250, 243, 224, 0.4)"
+          background: "rgba(250, 243, 224, 0.15)"
         }}
       />
 
       {/* Content Layer (z-index: 20) */}
       <div className="relative w-full max-w-7xl mx-auto px-4 md:px-6 z-20">
         {/* Semi-transparent text container for visual separation and readability */}
-        <div className="bg-white/60 backdrop-blur-md rounded-luxury border border-white/40 p-5 sm:p-10 md:p-12 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 lg:space-y-7 max-w-4xl mx-auto lg:mx-0">
+        <div className="bg-white/55 backdrop-blur-md rounded-luxury border border-white/40 p-5 sm:p-10 md:p-12 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 lg:space-y-7 max-w-4xl mx-auto lg:mx-0">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gold-border bg-white/70 shadow-sm">

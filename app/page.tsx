@@ -10,9 +10,9 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-gold-light">
       <Header />
-      <main className="min-h-screen bg-gold-light">
+      <main className="flex-grow">
         <Hero />
         <FeatureBar />
         <MenuGrid />
@@ -21,6 +21,6 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

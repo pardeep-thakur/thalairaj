@@ -8,8 +8,8 @@ interface FeatureCardProps {
 
 function FeatureCard({ title, description, icon }: FeatureCardProps) {
   return (
-    <div className="glass-card p-6 rounded-[24px] shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-start gap-4">
-      <div className="w-12 h-12 rounded-full bg-cream-warm flex items-center justify-center text-orange-cta border border-gold-border/40 shrink-0">
+    <div className="glass-card p-4 sm:p-6 rounded-2xl sm:rounded-[24px] shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-row items-start gap-4">
+      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-cream-warm flex items-center justify-center text-orange-cta border border-gold-border/40 shrink-0">
         {icon}
       </div>
       <div className="flex flex-col gap-1.5">

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,15 +29,14 @@ export default function Header() {
       } backdrop-blur-md flex items-center`}
     >
       <div className="w-full max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link href="#home" className="flex items-center gap-2 group focus-visible:outline-none">
-          {/* Crown Icon */}
-          <svg
-            className="w-5.5 h-5.5 text-orange-cta transition-transform duration-300 group-hover:scale-110"
-            fill="currentColor"
-            viewBox="0 0 256 256"
-          >
-            <path d="M240,96a16,16,0,0,0-21.49-15l-33.15,11-40-60a16,16,0,0,0-26.68,0l-40,60L25.49,81A16,16,0,0,0,4,96v88a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V96ZM216,184H40V105.74l39.46,13.16a16,16,0,0,0,18.06-7.56L128,65.37l30.48,45.97a16,16,0,0,0,18.06,7.56l39.46-13.16Z" />
-          </svg>
+        <Link href="#home" className="flex items-center gap-3 group focus-visible:outline-none">
+          <Image
+            src="/assets/thalairaj_logo.png"
+            alt="Thalairaj Logo"
+            width={44}
+            height={44}
+            className="object-contain w-11 h-11 rounded-full border border-gold-border/40 transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="font-serif font-extrabold text-xl md:text-2xl tracking-widest text-purple-brand leading-none">
             THALAIRAJ
           </span>

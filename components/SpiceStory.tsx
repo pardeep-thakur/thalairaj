@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SpiceStory() {
   return (
-    <section id="about" className="relative py-20 md:py-28 bg-cream-warm border-y border-gold-border/40">
+    <section id="about" className="relative py-12 md:py-16 bg-cream-warm border-y border-gold-border/40">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
