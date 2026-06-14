@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function CTASection() {
   return (
@@ -9,13 +10,13 @@ export default function CTASection() {
       <div className="absolute -top-20 -right-20 w-80 h-80 bg-gold-border/10 rounded-full blur-2xl -z-10" />
 
       <div className="max-w-4xl mx-auto px-4 md:px-6 z-10 flex flex-col items-center space-y-6 md:space-y-8">
-        <svg
-          className="w-10 h-10 text-orange-cta"
-          fill="currentColor"
-          viewBox="0 0 256 256"
-        >
-          <path d="M240,96a16,16,0,0,0-21.49-15l-33.15,11-40-60a16,16,0,0,0-26.68,0l-40,60L25.49,81A16,16,0,0,0,4,96v88a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V96ZM216,184H40V105.74l39.46,13.16a16,16,0,0,0,18.06-7.56L128,65.37l30.48,45.97a16,16,0,0,0,18.06,7.56l39.46-13.16Z" />
-        </svg>
+        <Image
+          src="/assets/thalairaj_logo.png"
+          alt="Thalairaj Logo"
+          width={48}
+          height={48}
+          className="object-contain rounded-full border border-gold-border/40 bg-white/10 shadow-sm"
+        />
 
         <h2 className="font-serif font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold-light leading-tight max-w-3xl">
           Experience the Royal Taste of Tradition

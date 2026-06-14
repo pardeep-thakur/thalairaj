@@ -225,20 +225,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Call to Action Button */}
-        <div className="text-center mt-10">
-          <a
-            href="https://www.google.com/maps/place/Thalairaj+Biryani+@+Ardee+Mall/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#F97316] text-white font-bold rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg hover:-translate-y-0.5 transition-all text-center uppercase tracking-wider text-sm md:text-base focus-visible:outline-none min-h-[48px]"
-          >
-            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-              <path d="M12.24 10.285V13.4h6.887C18.2 15.614 15.645 18 12.24 18c-3.86 0-7-3.14-7-7s3.14-7 7-7c1.7 0 3.3.6 4.5 1.7l2.44-2.44C17.3 1.42 14.9.77 12.24.77c-5.65 0-10.24 4.59-10.24 10.23s4.59 10.23 10.24 10.23c5.9 0 9.8-4.15 9.8-9.98 0-.67-.06-1.3-.16-1.97H12.24z" />
-            </svg>
-            View All Reviews on Google
-          </a>
-        </div>
+
       </div>
     </section>
   );

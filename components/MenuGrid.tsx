@@ -1,544 +1,317 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-
-// Full menu database from original script
-const MENU_DATA = [
-  // Biryani Bowls
-  {
-    id: "bowl-boneless-chick",
-    name: "Boneless Chicken Biryani Bowl",
-    price: 219,
-    desc: "Aromatic basmati rice layered with tender, spiced boneless chicken chunks. Perfect single-serving portion.",
-    category: "bowls",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "bowl-pepper-chick",
-    name: "Pepper Chicken Biryani Bowl",
-    price: 219,
-    desc: "Flavourful biryani rice served with a fiery topping of boneless pepper chicken fry.",
-    category: "bowls",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "bowl-exotic-paneer",
-    name: "Exotic Paneer Biryani Bowl",
-    price: 219,
-    desc: "Saffron-infused rice served with rich, pan-seared spiced cottage cheese cubes.",
-    category: "bowls",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "bowl-pepper-shroom",
-    name: "Pepper Mushroom Biryani Bowl",
-    price: 219,
-    desc: "Indulgent basmati rice bowl topped with black pepper stir-fried fresh mushrooms.",
-    category: "bowls",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  // Biryanis & Rice
-  {
-    id: "biryani-boneless-chick",
-    name: "Boneless Chicken Biryani",
-    price: 289,
-    desc: "Our signature boneless chicken biryani cooked with traditional long-grain rice and handpicked 21 spices.",
-    category: "biryanis",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "biryani-dum-chick",
-    name: "Chicken Dum Biryani",
-    price: 295,
-    desc: "Classic slow-cooked Hyderabadi-style basmati rice with bone-in tender chicken, infused with saffron.",
-    category: "biryanis",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "biryani-kebab",
-    name: "Kebab Biryani",
-    price: 285,
-    desc: "Unique blend of charcoal-grilled juicy chicken kebabs layered in flavorful biryani rice.",
-    category: "biryanis",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "biryani-pep-chick",
-    name: "Pepper Chicken Boneless Biryani",
-    price: 289,
-    desc: "Fragrant basmati rice served alongside Southern-style boneless black pepper chicken dry fry.",
-    category: "biryanis",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "biryani-exotic-paneer",
-    name: "Exotic Paneer Biryani",
-    price: 289,
-    desc: "Premium basmati rice slow-baked with marinated fresh paneer cubes, mint, and saffron.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "biryani-pep-paneer",
-    name: "Pepper Paneer Biryani",
-    price: 275,
-    desc: "Rich saffron rice baked with dry-spiced paneer cubes stir-fried with cracked black pepper.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  {
-    id: "biryani-pep-shroom",
-    name: "Pepper Mushroom Biryani",
-    price: 259,
-    desc: "Aromatic basmati rice cooked with fresh mushrooms seasoned with Southern black pepper masala.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  {
-    id: "biryani-potato-dum",
-    name: "Potato Dum Biryani",
-    price: 239,
-    desc: "Authentic dum-style vegetarian biryani cooked with herb-marinated baby potatoes.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "biryani-egg",
-    name: "Egg Biryani",
-    price: 219,
-    desc: "Savory basmati biryani rice served with hard-boiled eggs tossed in a spicy masala glaze.",
-    category: "biryanis",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "biryani-rice-only",
-    name: "Signature Biryani Rice",
-    price: 199,
-    desc: "Our highly aromatic seasoned basmati rice without meat, cooked in signature spices.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "rice-plain",
-    name: "Plain Basmati Rice",
-    price: 129,
-    desc: "Perfectly steamed, premium long-grain white basmati rice.",
-    category: "biryanis",
-    isVeg: true,
-    spicyLevel: 0,
-  },
-  // Family Packs
-  {
-    id: "fam-boneless-chick",
-    name: "Boneless Chicken Biryani Family Pack",
-    price: 875,
-    desc: "Feeds 3-4 people. Served with generous portions of boneless chicken biryani, extra raita, and salan.",
-    category: "family",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "fam-pep-chick",
-    name: "Pepper Chicken Boneless Biryani Family Pack",
-    price: 875,
-    desc: "Feeds 3-4 people. Saffron rice combined with extra-spicy boneless black pepper chicken fry.",
-    category: "family",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "fam-dum-chick",
-    name: "Dum Chicken Biryani Family Pack",
-    price: 875,
-    desc: "Feeds 3-4 people. Authentic classic slow-cooked bone-in chicken dum biryani, classic family size.",
-    category: "family",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "fam-kebab-chick",
-    name: "Kebab Chicken Biryani Family Pack",
-    price: 849,
-    desc: "Feeds 3-4 people. Perfect combination of charcoal-grilled chicken kebabs layered in biryani rice.",
-    category: "family",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "fam-exotic-paneer",
-    name: "Exotic Paneer Biryani Family Pack",
-    price: 849,
-    desc: "Feeds 3-4 people. Indulgent vegetarian feast of slow-baked paneer biryani for family gatherings.",
-    category: "family",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "fam-pep-shroom",
-    name: "Pepper Mushroom Biryani Family Pack",
-    price: 825,
-    desc: "Feeds 3-4 people. Loaded with delicious pepper-seasoned mushrooms layered in premium basmati.",
-    category: "family",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  // Starters
-  {
-    id: "start-neruppu-21",
-    name: "Neruppu Chicken 21 Boneless",
-    price: 249,
-    desc: "Our absolute bestseller! Fiery, hot pan-fried boneless chicken tossed in a secret spicy red glaze.",
-    category: "starters",
-    isVeg: false,
-    spicyLevel: 3,
-  },
-  {
-    id: "start-kebab-full",
-    name: "Chicken Kebab Boneless (Full)",
-    price: 229,
-    desc: "Crispy, deep-fried spiced boneless chicken bites marinated in yogurt and traditional herbs.",
-    category: "starters",
-    isVeg: false,
-    spicyLevel: 1,
-  },
-  {
-    id: "start-pep-chick",
-    name: "Pepper Chicken Fry Boneless",
-    price: 249,
-    desc: "Classic dry-fry chicken cooked with crushed black pepper, green chilies, and fresh curry leaves.",
-    category: "starters",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "start-roast-chick",
-    name: "Roasted Chicken Masala",
-    price: 249,
-    desc: "Tender boneless chicken roasted in a thick onion-tomato gravy with freshly ground spices.",
-    category: "starters",
-    isVeg: false,
-    spicyLevel: 2,
-  },
-  {
-    id: "start-roast-paneer",
-    name: "Roasted Paneer Masala",
-    price: 219,
-    desc: "Spiced cottage cheese cubes pan-roasted in a fragrant, thick semi-dry gravy.",
-    category: "starters",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-  {
-    id: "start-pep-paneer",
-    name: "Pepper Paneer Fry",
-    price: 219,
-    desc: "Cottage cheese cubes wok-tossed with crushed black pepper, capsicum, and herbs.",
-    category: "starters",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  {
-    id: "start-pep-shroom",
-    name: "Mushroom Pepper Fry",
-    price: 219,
-    desc: "Fresh button mushrooms stir-fried with black pepper, mustard seeds, and curry leaves.",
-    category: "starters",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  {
-    id: "start-pot-sholay",
-    name: "Potato Sholay",
-    price: 179,
-    desc: "Crispy baby potatoes tossed in a spicy, tangy red chili and yogurt glaze.",
-    category: "starters",
-    isVeg: true,
-    spicyLevel: 2,
-  },
-  // Extras
-  {
-    id: "extra-ghee-roti",
-    name: "Ghee Wheat Roti",
-    price: 30,
-    desc: "Soft whole wheat flatbread baked on a tawa and brushed with rich pure ghee.",
-    category: "extras",
-    isVeg: true,
-    spicyLevel: 0,
-  },
-  {
-    id: "extra-plain-roti",
-    name: "Wheat Roti",
-    price: 20,
-    desc: "Soft flame-baked whole wheat flatbread.",
-    category: "extras",
-    isVeg: true,
-    spicyLevel: 0,
-  },
-  {
-    id: "extra-raita",
-    name: "Raita",
-    price: 20,
-    desc: "Cooling whipped yogurt condiment seasoned with onions, cucumber, and roasted cumin.",
-    category: "extras",
-    isVeg: true,
-    spicyLevel: 0,
-  },
-  {
-    id: "extra-egg",
-    name: "Thalairaj Whole Egg",
-    price: 20,
-    desc: "A single, seasoned hard-boiled egg.",
-    category: "extras",
-    isVeg: false,
-    spicyLevel: 0,
-  },
-  {
-    id: "extra-curry",
-    name: "Salan Curry",
-    price: 20,
-    desc: "Rich, spiced gravy peanut-sesame salan to accompany your biryani.",
-    category: "extras",
-    isVeg: true,
-    spicyLevel: 1,
-  },
-];
-
-// Mapping of categories to visual assets
-const CATEGORY_IMAGES: Record<string, string> = {
-  bowls: "/assets/menu_bowl.png",
-  biryanis: "/assets/menu_biryani.png",
-  family: "/assets/menu_family.png",
-  starters: "/assets/menu_starter.png",
-  extras: "/assets/menu_extra.png",
-};
-
-
+import { MENU_DATA, CATEGORIES, MenuItem } from "../data/menu";
+import MenuLightbox from "./MenuLightbox";
 
 export default function MenuGrid() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [isVegOnly, setIsVegOnly] = useState(false);
+  const [foodType, setFoodType] = useState<"all" | "veg" | "non-veg">("all");
+  const [isBestsellerOnly, setIsBestsellerOnly] = useState(false);
+  const [sortBy, setSortBy] = useState<"popular" | "price-low" | "price-high" | "rating">("popular");
 
-  // Filter logic
+  // Lightbox State
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  // Track image load errors to fall back gracefully
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (id: string) => {
+    setImageErrors((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const getDisplayImage = (item: MenuItem) => {
+    if (imageErrors[item.id] || !item.imageUrl) {
+      switch (item.category) {
+        case "bowls": return "/assets/menu_bowl.png";
+        case "family": return "/assets/menu_family.png";
+        case "starters": return "/assets/menu_starter.png";
+        case "extras": return "/assets/menu_extra.png";
+        default: return "/assets/menu_biryani.png";
+      }
+    }
+    return item.imageUrl;
+  };
+
+  // Filter & Sort Logic
   const filteredItems = useMemo(() => {
-    return MENU_DATA.filter((item) => {
-      if (activeCategory !== "all" && item.category !== activeCategory) {
+    let items = MENU_DATA.filter((item) => {
+      // Category filter
+      if (activeCategory === "recommended") {
+        if (!item.isBestseller) return false;
+      } else if (activeCategory !== "all" && item.category !== activeCategory) {
         return false;
       }
-      if (isVegOnly && !item.isVeg) {
-        return false;
-      }
+
+      // Veg/Non-Veg filter
+      if (foodType === "veg" && item.type !== "Veg") return false;
+      if (foodType === "non-veg" && item.type !== "Non-veg") return false;
+
+      // Bestseller only toggle
+      if (isBestsellerOnly && !item.isBestseller) return false;
+
+      // Search keyword filter (Fuzzy search)
       if (searchKeyword) {
         const keyword = searchKeyword.toLowerCase();
         return (
           item.name.toLowerCase().includes(keyword) ||
-          item.desc.toLowerCase().includes(keyword)
+          item.description.toLowerCase().includes(keyword)
         );
       }
+
       return true;
     });
-  }, [activeCategory, searchKeyword, isVegOnly]);
 
-  const categories = [
-    { id: "all", label: "All Items" },
-    { id: "bowls", label: "Biryani Bowls" },
-    { id: "biryanis", label: "Biryanis & Rice" },
-    { id: "family", label: "Family Packs" },
-    { id: "starters", label: "Starters" },
-    { id: "extras", label: "Extras" },
-  ];
+    // Sorting Logic
+    if (sortBy === "price-low") {
+      items = [...items].sort((a, b) => a.price - b.price);
+    } else if (sortBy === "price-high") {
+      items = [...items].sort((a, b) => b.price - a.price);
+    } else if (sortBy === "rating") {
+      items = [...items].sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
+
+    return items;
+  }, [activeCategory, foodType, isBestsellerOnly, searchKeyword, sortBy]);
+
+  const openLightbox = (item: MenuItem) => {
+    const idx = filteredItems.findIndex((fi) => fi.id === item.id);
+    if (idx !== -1) {
+      setLightboxIndex(idx);
+      setLightboxOpen(true);
+    }
+  };
 
   return (
     <section id="menu" className="relative py-12 md:py-16 bg-cream-warm">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         
-        {/* ================= ROYAL FEAST MENU EXPLORER ================= */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold tracking-[0.2em] text-orange-cta uppercase block mb-3">
-            Our Menu
+            Royal Feast Menu
           </span>
-          <h2 className="font-serif font-black text-3xl md:text-5xl text-purple-brand leading-tight mb-4">
-            Explore Our Full Royal Feast
+          <h2 className="font-serif font-black text-3xl md:text-5xl text-purple-brand leading-tight mb-3">
+            Explore Our Culinary Treasures
           </h2>
           <p className="text-text-secondary text-sm md:text-base leading-relaxed">
-            Use search and filters below to browse our complete collection of starters, bowls, sides, and family packs.
+            Organized from Nizam kitchens to Swiggy hotlists. Use filters below to customize your royal feast.
           </p>
         </div>
 
-          {/* Explorer Filter Controls */}
-          <div className="glass-panel p-6 rounded-[24px] mb-12 flex flex-col gap-6 shadow-sm">
-            {/* Top Row: Search and Veg Toggle */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between w-full">
-              {/* Search Box */}
-              <div className="relative w-full md:max-w-md">
-                <svg
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-brand/60"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Search our royal menu..."
-                  value={searchKeyword}
-                  onChange={(e) => setSearchKeyword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white rounded-xl border-2 border-gold-border focus:border-purple-brand focus:ring-2 focus:ring-purple-brand/20 outline-none transition-all text-sm font-medium text-text-primary shadow-sm placeholder-text-secondary/50 focus:bg-white"
-                />
-              </div>
+        {/* Filter Panel (Glassmorphism design) */}
+        <div className="glass-panel p-5 rounded-2xl mb-8 shadow-sm border border-gold-border/30">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+            
+            {/* Search Input (col-span-4) */}
+            <div className="relative md:col-span-4 w-full">
+              <svg
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-brand/60"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search royal dishes..."
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-gold-border/60 focus:border-purple-brand focus:ring-2 focus:ring-purple-brand/20 outline-none transition-all text-sm font-medium text-text-primary shadow-sm"
+              />
+            </div>
 
-              {/* Veg Switch - Aligned on the right on larger screens, next to/below search on mobile */}
-              <div className="flex items-center justify-between md:justify-start gap-4 bg-white/80 px-5 py-2.5 rounded-full border border-gold-border/80 shadow-sm shrink-0 w-full md:w-auto">
-                <div className="flex items-center gap-2">
-                  <span className="w-3.5 h-3.5 rounded-sm flex items-center justify-center border border-green-600 p-[1.5px] shrink-0">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-600" />
-                  </span>
-                  <span className="text-sm font-bold text-text-secondary">Veg Only</span>
-                </div>
+            {/* Food Type Toggle (col-span-3) */}
+            <div className="md:col-span-3 flex bg-white border border-gold-border/60 rounded-xl p-1 shadow-sm w-full">
+              {(["all", "veg", "non-veg"] as const).map((type) => (
                 <button
-                  role="switch"
-                  aria-checked={isVegOnly}
-                  onClick={() => setIsVegOnly(!isVegOnly)}
-                  className={`w-11 h-6 rounded-full p-0.5 transition-all duration-300 focus-visible:outline-none relative ${
-                    isVegOnly ? "bg-green-600" : "bg-gray-200"
+                  key={type}
+                  onClick={() => setFoodType(type)}
+                  className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all focus-visible:outline-none ${
+                    foodType === type
+                      ? type === "veg"
+                        ? "bg-green-600 text-white shadow-sm"
+                        : type === "non-veg"
+                        ? "bg-red-600 text-white shadow-sm"
+                        : "bg-purple-brand text-white shadow-sm"
+                      : "text-text-secondary hover:bg-gold-light/20"
                   }`}
                 >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white shadow-md transform transition-all duration-300 ${
-                      isVegOnly ? "translate-x-5" : "translate-x-0"
-                    }`}
-                  />
+                  {type === "all" ? "All" : type === "veg" ? "Veg" : "Non-Veg"}
                 </button>
+              ))}
+            </div>
+
+            {/* Bestseller Toggle Checkbox (col-span-2) */}
+            <div className="md:col-span-2 flex items-center justify-center bg-white border border-gold-border/60 rounded-xl px-4 py-2.5 shadow-sm w-full select-none">
+              <label className="flex items-center gap-2.5 cursor-pointer w-full justify-between md:justify-center">
+                <span className="text-xs font-bold text-text-secondary uppercase tracking-wider">Bestsellers</span>
+                <input
+                  type="checkbox"
+                  checked={isBestsellerOnly}
+                  onChange={(e) => setIsBestsellerOnly(e.target.checked)}
+                  className="w-4 h-4 rounded text-orange-500 border-gold-border focus:ring-orange-500 accent-orange-cta cursor-pointer"
+                />
+              </label>
+            </div>
+
+            {/* Sorting Dropdown (col-span-3) */}
+            <div className="md:col-span-3 relative w-full">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="w-full px-4 py-2.5 bg-white rounded-xl border border-gold-border/60 focus:border-purple-brand focus:ring-2 focus:ring-purple-brand/20 outline-none transition-all text-sm font-bold text-text-secondary shadow-sm appearance-none cursor-pointer"
+              >
+                <option value="popular">Popularity</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Rating: High to Low</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-text-secondary">
+                <svg className="fill-current h-4 w-4" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
               </div>
             </div>
 
-            {/* Bottom Row: Category Slider Tabs (Horizontally scrollable) */}
-            <div className="relative w-full border-t border-gold-border/20 pt-4">
-              <div className="w-full overflow-x-auto no-scrollbar flex items-center gap-3 py-1 scroll-smooth snap-x">
-                {categories.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveCategory(tab.id)}
-                    className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-all focus-visible:outline-none min-h-[40px] flex items-center justify-center border ${
-                      activeCategory === tab.id
-                        ? "bg-purple-brand text-white border-purple-brand shadow-md shadow-purple-brand/10"
-                        : "bg-white text-text-secondary border-gold-border hover:bg-gold-light/20"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
+        </div>
 
-          {/* Interactive Grid */}
-          {filteredItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Sticky Horizontal Categories Bar */}
+        <div className="sticky top-20 z-40 bg-cream-warm/95 backdrop-blur shadow-sm border-b border-gold-border/30 -mx-4 px-4 sm:-mx-6 sm:px-6 py-3 mb-8">
+          <div className="max-w-7xl mx-auto overflow-x-auto no-scrollbar flex items-center gap-2.5 scroll-smooth snap-x">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all focus-visible:outline-none min-h-[38px] flex items-center justify-center border ${
+                  activeCategory === cat.id
+                    ? "bg-purple-brand text-white border-purple-brand shadow-md shadow-purple-brand/10"
+                    : "bg-white text-text-secondary border-gold-border/60 hover:bg-gold-light/20"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Menu Grid / List */}
+        {filteredItems.length > 0 ? (
+          <div>
+            {/* Desktop View (Grid Layout) */}
+            <div className="hidden sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredItems.map((item) => {
-                const foodImg = CATEGORY_IMAGES[item.category] || "/assets/menu_biryani.png";
+                const isItemBestseller = item.isBestseller;
                 return (
                   <div
                     key={item.id}
-                    className="bg-white/80 rounded-[20px] p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-gold-border/30 flex flex-col justify-between group"
+                    className={`bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between border group relative ${
+                      isItemBestseller ? "border-orange-cta/40 hover:border-orange-cta/80 ring-1 ring-orange-cta/5" : "border-gold-border/30"
+                    }`}
                   >
                     <div>
-                      {/* Top metadata */}
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`w-3 h-3 rounded-sm flex items-center justify-center border ${
-                              item.isVeg ? "border-green-600 p-[1.5px]" : "border-red-600 p-[1.5px]"
-                            }`}
-                          >
-                            <span
-                              className={`w-1 h-1 rounded-full ${
-                                item.isVeg ? "bg-green-600" : "bg-red-600"
-                              }`}
-                            />
+                      {/* Image Container */}
+                      <div 
+                        className="relative w-full aspect-[4/3] bg-gold-light/10 overflow-hidden cursor-pointer select-none"
+                        onClick={() => openLightbox(item)}
+                      >
+                        <Image
+                          src={getDisplayImage(item)}
+                          alt={item.name}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 30vw"
+                          loading="lazy"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          onError={() => handleImageError(item.id)}
+                        />
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="bg-white/90 text-purple-brand font-bold text-xs px-3.5 py-1.5 rounded-full shadow flex items-center gap-1.5">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            View Details
                           </span>
-                          <span className="text-[9px] font-bold text-text-secondary uppercase tracking-wider">
+                        </div>
+
+                        {/* Top Badges */}
+                        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                          {isItemBestseller && (
+                            <span className="font-bold text-white text-[9px] uppercase tracking-widest bg-orange-cta border border-orange-500/50 px-2 py-0.5 rounded shadow-sm">
+                              Bestseller
+                            </span>
+                          )}
+                          <span className="text-[10px] font-bold text-white uppercase tracking-wider bg-purple-brand/80 px-2 py-0.5 rounded shadow-sm w-max">
                             {item.category}
                           </span>
                         </div>
 
-                        {item.spicyLevel > 0 && (
-                          <div className="flex gap-0.5 text-orange-cta">
-                            {Array.from({ length: item.spicyLevel }).map((_, i) => (
-                              <svg
-                                key={i}
-                                className="w-3 h-3 fill-current"
-                                viewBox="0 0 256 256"
-                              >
-                                <path d="M168,136a40,40,0,0,1-80,0c0-23.75,28-61.22,40-75.76C140,74.78,168,112.25,168,136Z" />
-                              </svg>
-                            ))}
-                          </div>
-                        )}
+                        {/* Veg / Non-Veg Indicator */}
+                        <span
+                          className={`absolute top-3 right-3 w-5 h-5 rounded bg-white shadow-sm flex items-center justify-center border z-10 ${
+                            item.type === "Veg" ? "border-green-600 p-[3px]" : "border-red-600 p-[3px]"
+                          }`}
+                        >
+                          <span className={`w-2 h-2 rounded-full ${item.type === "Veg" ? "bg-green-600" : "bg-red-600"}`} />
+                        </span>
                       </div>
 
-                      {/* Content split */}
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="relative w-16 h-16 rounded-lg bg-gold-light/10 overflow-hidden shrink-0 flex items-center justify-center p-1 border border-gold-border/20">
-                          <Image
-                            src={foodImg}
-                            alt={item.name}
-                            width={64}
-                            height={64}
-                            className="object-contain w-auto h-full drop-shadow-sm"
-                          />
-                        </div>
-                        <div className="flex-grow">
-                          <h4 className="font-serif font-bold text-text-primary text-base leading-tight mb-1 group-hover:text-purple-brand transition-colors">
+                      {/* Content Section */}
+                      <div className="p-5">
+                        <div className="flex justify-between items-start gap-2 mb-2">
+                          <h4 className="font-serif font-black text-text-primary text-base leading-tight group-hover:text-purple-brand transition-colors">
                             {item.name}
                           </h4>
-                          <p className="text-text-secondary text-xs line-clamp-2 leading-relaxed">
-                            {item.desc}
-                          </p>
                         </div>
+
+                        {/* Rating block */}
+                        {item.rating && (
+                          <div className="flex items-center gap-1 mb-2 text-xs text-text-secondary font-bold">
+                            <span className="text-orange-cta text-sm leading-none">★</span>
+                            <span className="text-text-primary">{item.rating}</span>
+                            <span className="font-medium text-text-secondary/70">({item.ratingCount})</span>
+                          </div>
+                        )}
+
+                        <p className="text-text-secondary text-xs leading-relaxed line-clamp-3 mb-2 font-medium">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
 
-                    {/* Bottom row */}
-                    <div className="flex items-center justify-between border-t border-gold-border/20 pt-3 mt-auto">
-                      <span className="font-serif font-black text-lg text-purple-brand">
-                        ₹{item.price}
-                      </span>
-                      <div className="flex gap-1.5">
+                    {/* Pricing and Action row */}
+                    <div className="px-5 pb-5 pt-3 border-t border-gold-border/20 flex items-center justify-between">
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="font-serif font-black text-lg text-purple-brand">
+                          ₹{item.price}
+                        </span>
+                        {item.originalPrice && (
+                          <span className="text-xs line-through text-text-secondary/50">
+                            ₹{item.originalPrice}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex gap-2">
                         <a
                           href="https://www.swiggy.com/search?query=Thalairaj+Biryani"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-1 bg-[#fc8019] text-white text-[10px] font-bold rounded hover:bg-orange-600 transition-all flex items-center min-h-[30px]"
+                          className="px-3 py-1.5 bg-[#fc8019] text-white text-[10px] font-bold rounded-lg hover:bg-orange-600 transition-all flex items-center min-h-[30px]"
                         >
                           Swiggy
                         </a>
                         <a
-                          href="https://www.zomato.com/bengaluru/restaurants?q=Thalairaj+Biryani"
+                          href="https://www.zomato.com/ncr/thalairaj-biryani-tilak-nagar-new-delhi"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-1 bg-[#cb202d] text-white text-[10px] font-bold rounded hover:bg-red-700 transition-all flex items-center min-h-[30px]"
+                          className="px-3 py-1.5 bg-[#cb202d] text-white text-[10px] font-bold rounded-lg hover:bg-red-700 transition-all flex items-center min-h-[30px]"
                         >
                           Zomato
                         </a>
@@ -548,30 +321,147 @@ export default function MenuGrid() {
                 );
               })}
             </div>
-          ) : (
-            <div className="text-center py-16 bg-white rounded-[24px] border border-gold-border/40 shadow-inner flex flex-col items-center justify-center p-6">
-              <svg
-                className="w-16 h-16 text-gold-border mb-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-              <h4 className="font-serif font-bold text-text-primary text-xl mb-1">
-                No Royal Dishes Found
-              </h4>
-              <p className="text-text-secondary text-sm">
-                Try adjusting your filters, resetting the veg toggle, or clearing the search query.
-              </p>
+
+            {/* Mobile View (Swiggy-style Horizontal Row Cards) */}
+            <div className="sm:hidden flex flex-col gap-1">
+              {filteredItems.map((item) => {
+                const isItemBestseller = item.isBestseller;
+                return (
+                  <div
+                    key={item.id}
+                    className={`flex items-start justify-between py-5 border-b border-gold-border/30 bg-white/40 backdrop-blur-sm px-3.5 rounded-xl mb-3 border ${
+                      isItemBestseller ? "border-orange-cta/30" : "border-transparent"
+                    }`}
+                  >
+                    {/* Left text column */}
+                    <div className="flex-grow pr-4">
+                      {/* Badge / Indicator Row */}
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span
+                          className={`w-3.5 h-3.5 rounded-sm flex items-center justify-center border bg-white ${
+                            item.type === "Veg" ? "border-green-600 p-[2px]" : "border-red-600 p-[2px]"
+                          }`}
+                        >
+                          <span className={`w-1.5 h-1.5 rounded-full ${item.type === "Veg" ? "bg-green-600" : "bg-red-600"}`} />
+                        </span>
+
+                        {isItemBestseller && (
+                          <span className="font-bold text-orange-600 uppercase tracking-widest text-[9px] bg-orange-100/60 border border-orange-200 px-1 py-0.5 rounded">
+                            Bestseller
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Name */}
+                      <h4 className="font-serif font-black text-text-primary text-sm leading-snug mb-1">
+                        {item.name}
+                      </h4>
+
+                      {/* Price */}
+                      <div className="flex items-baseline gap-1.5 mb-1.5">
+                        <span className="font-serif font-black text-sm text-purple-brand">
+                          ₹{item.price}
+                        </span>
+                        {item.originalPrice && (
+                          <span className="text-[10px] line-through text-text-secondary/50">
+                            ₹{item.originalPrice}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Ratings */}
+                      {item.rating && (
+                        <div className="flex items-center gap-1 mb-2 text-[10px] text-text-secondary font-bold">
+                          <span className="text-orange-cta text-xs leading-none">★</span>
+                          <span className="text-text-primary">{item.rating}</span>
+                          <span className="font-medium text-text-secondary/70">({item.ratingCount})</span>
+                        </div>
+                      )}
+
+                      {/* Description */}
+                      <p className="text-text-secondary text-xs leading-normal line-clamp-2 pr-1 font-light">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {/* Right media column */}
+                    <div className="flex flex-col items-center shrink-0 w-28 gap-2.5">
+                      <div 
+                        className="relative w-28 h-28 rounded-xl bg-gold-light/20 overflow-hidden cursor-pointer shadow-sm border border-gold-border/20"
+                        onClick={() => openLightbox(item)}
+                      >
+                        <Image
+                          src={getDisplayImage(item)}
+                          alt={item.name}
+                          fill
+                          sizes="112px"
+                          loading="lazy"
+                          className="object-cover"
+                          onError={() => handleImageError(item.id)}
+                        />
+                        {/* Zoom overlay indicator */}
+                        <div className="absolute bottom-1 right-1 bg-black/60 rounded p-1 text-[8px] text-white flex items-center gap-0.5">
+                          <svg className="w-2 h-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                          </svg>
+                          Zoom
+                        </div>
+                      </div>
+
+                      {/* Order Buttons */}
+                      <div className="flex gap-1.5 w-full justify-between">
+                        <a
+                          href="https://www.swiggy.com/search?query=Thalairaj+Biryani"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-1.5 bg-[#fc8019] text-white text-[9px] font-bold rounded hover:bg-orange-600 transition-all text-center min-h-[26px] flex items-center justify-center focus-visible:outline-none"
+                        >
+                          Swiggy
+                        </a>
+                        <a
+                          href="https://www.zomato.com/ncr/thalairaj-biryani-tilak-nagar-new-delhi"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 py-1.5 bg-[#cb202d] text-white text-[9px] font-bold rounded hover:bg-red-700 transition-all text-center min-h-[26px] flex items-center justify-center focus-visible:outline-none"
+                        >
+                          Zomato
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          )}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-white rounded-2xl border border-gold-border/30 shadow-inner flex flex-col items-center justify-center p-6 max-w-md mx-auto">
+            <svg
+              className="w-12 h-12 text-gold-border mb-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <h4 className="font-serif font-black text-text-primary text-lg mb-1">
+              No Dishes Match Filters
+            </h4>
+            <p className="text-text-secondary text-xs">
+              Try adjusting search terms, toggling the Veg/Non-Veg buttons, or resetting category selections.
+            </p>
+          </div>
+        )}
+
       </div>
+
+      {/* Lightbox Modal */}
+      <MenuLightbox
+        isOpen={lightboxOpen}
+        onClose={() => setLightboxOpen(false)}
+        items={filteredItems}
+        initialIndex={lightboxIndex}
+      />
     </section>
   );
 }

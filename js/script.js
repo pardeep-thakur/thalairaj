@@ -402,7 +402,7 @@ function renderMenu() {
     card.className = "food-card-item";
     
     const foodImg = categoryImages[item.category] || 'assets/menu_biryani.png';
-    const zomatoLink = `https://www.zomato.com/bengaluru/restaurants?q=Thalairaj+Biryani`;
+    const zomatoLink = `https://www.zomato.com/ncr/thalairaj-biryani-tilak-nagar-new-delhi`;
     const swiggyLink = `https://www.swiggy.com/search?query=Thalairaj+Biryani`;
 
     card.innerHTML = `

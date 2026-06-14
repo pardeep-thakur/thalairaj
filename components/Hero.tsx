@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -8,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[95vh] lg:min-h-screen flex items-center pt-28 pb-20 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28 overflow-hidden bg-gold-light"
+      className="relative min-h-[95vh] lg:min-h-screen flex items-center pt-24 pb-24 md:pt-28 md:pb-28 lg:pt-32 lg:pb-32 overflow-hidden bg-gold-light"
     >
       {/* Video Background Layer (z-index: 0) */}
       <video
@@ -33,13 +34,17 @@ export default function Hero() {
       {/* Content Layer (z-index: 20) */}
       <div className="relative w-full max-w-7xl mx-auto px-4 md:px-6 z-20">
         {/* Semi-transparent text container for visual separation and readability */}
-        <div className="bg-white/55 backdrop-blur-md rounded-luxury border border-white/40 p-5 sm:p-10 md:p-12 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 lg:space-y-7 max-w-4xl mx-auto lg:mx-0">
+        <div className="bg-white/55 backdrop-blur-md rounded-luxury border border-white/40 p-5 sm:p-8 md:p-10 shadow-xl flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 lg:space-y-6 max-w-4xl mx-auto lg:mx-0">
           
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-gold-border bg-white/70 shadow-sm">
-            <svg className="w-4 h-4 text-orange-cta" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M240,96a16,16,0,0,0-21.49-15l-33.15,11-40-60a16,16,0,0,0-26.68,0l-40,60L25.49,81A16,16,0,0,0,4,96v88a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V96ZM216,184H40V105.74l39.46,13.16a16,16,0,0,0,18.06-7.56L128,65.37l30.48,45.97a16,16,0,0,0,18.06,7.56l39.46-13.16Z" />
-            </svg>
+            <Image
+              src="/assets/thalairaj_logo.png"
+              alt="Thalairaj Logo"
+              width={18}
+              height={18}
+              className="object-contain rounded-full border border-gold-border/20"
+            />
             <span className="text-xs font-bold tracking-[0.15em] text-[#F97316] uppercase">
               Royal Taste. Authentic Tradition.
             </span>

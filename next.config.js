@@ -2,6 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['172.16.0.2', 'localhost:3000', 'localhost:3001', 'localhost:3002'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media-assets.swiggy.com',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
